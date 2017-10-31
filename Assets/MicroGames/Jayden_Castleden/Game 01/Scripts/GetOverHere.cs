@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class GetOverHere : MonoBehaviour {
 
@@ -8,6 +10,8 @@ public class GetOverHere : MonoBehaviour {
     public Transform sub;
     public GameObject scorp;
     public Transform lastRope;
+
+    public Text fatal;
 
 
     public float time = 1f;
@@ -24,7 +28,7 @@ public class GetOverHere : MonoBehaviour {
         time += 1 * Time.deltaTime;
         move = true;
         activetime = true;
-        
+        fatal.enabled = false;
     }
 	
 	// Update is called once per frame
@@ -43,10 +47,18 @@ public class GetOverHere : MonoBehaviour {
         
     }
 
-    void OnTriggerExit(Collider rope)
+    void OnTriggerEnter(Collider sub)
     {
-        
-        if (rope.gameObject.CompareTag("Rope"))
+        if (sub.gameObject.CompareTag("Sub"))
+        {
+            fatal.enabled = true;
+        }
+    }
+
+    void OnTriggerExit(Collider rope)
+    {              
+
+            if (rope.gameObject.CompareTag("Rope"))
         {
             
             ropeRend = rope.gameObject.GetComponent<MeshRenderer>();
