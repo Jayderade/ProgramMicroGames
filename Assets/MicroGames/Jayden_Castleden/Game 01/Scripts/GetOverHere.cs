@@ -10,6 +10,8 @@ public class GetOverHere : MonoBehaviour {
     public Transform sub;
     public GameObject scorp;
     public Transform lastRope;
+    public GameObject iceBall;
+    public GameObject person;
 
     public Text fatal;
 
@@ -29,6 +31,7 @@ public class GetOverHere : MonoBehaviour {
         move = true;
         activetime = true;
         fatal.enabled = false;
+        person.SetActive(false);
     }
 	
 	// Update is called once per frame
@@ -52,6 +55,7 @@ public class GetOverHere : MonoBehaviour {
         if (sub.gameObject.CompareTag("Sub"))
         {
             fatal.enabled = true;
+            person.SetActive(true);
         }
     }
 
@@ -73,6 +77,7 @@ public class GetOverHere : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                iceBall.SetActive(false);
                 move = false;
             }
         }
