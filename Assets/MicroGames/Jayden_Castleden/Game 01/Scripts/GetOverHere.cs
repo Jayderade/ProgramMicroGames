@@ -13,6 +13,8 @@ public class GetOverHere : MonoBehaviour {
     public GameObject iceBall;
     public GameObject person;
 
+    public GameObject[] spawn;
+
     public Text fatal;
 
 
@@ -23,10 +25,20 @@ public class GetOverHere : MonoBehaviour {
     public bool activetime;
 
     public MeshRenderer ropeRend;
-    
 
-	// Use this for initialization
-	void Start () {
+
+    void Awake()
+    {
+        spawn = GameObject.FindGameObjectsWithTag("Spawner");
+
+        foreach (GameObject go in spawn)
+        {
+            go.GetComponent<BloodSpawn>().enabled = false;
+        }
+    }
+
+    // Use this for initialization
+    void Start () {
         time += 1 * Time.deltaTime;
         move = true;
         activetime = true;
@@ -38,7 +50,7 @@ public class GetOverHere : MonoBehaviour {
 	void Update () {
         Spear();
         time += 1 * Time.deltaTime;
-        if (time >= 4)
+        if (time >= 20)
         {
             activetime = false;
         }
@@ -54,6 +66,10 @@ public class GetOverHere : MonoBehaviour {
     {
         if (sub.gameObject.CompareTag("Sub"))
         {
+            foreach (GameObject go in spawn)
+            {
+                go.GetComponent<BloodSpawn>().enabled = true;
+            }
             fatal.enabled = true;
             person.SetActive(true);
         }

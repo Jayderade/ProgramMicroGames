@@ -11,9 +11,20 @@ public class Shoot : MonoBehaviour {
     public GameObject explode;
     public GameObject person;
     public Light flash;
+    public GameObject[] spawn;
 
-	// Use this for initialization
-	void Start () {
+    void Awake()
+    {
+        spawn = GameObject.FindGameObjectsWithTag("Spawner");
+
+        foreach (GameObject go in spawn)
+        {
+            go.GetComponent<BloodSpawn>().enabled = false;
+        }
+    }
+
+    // Use this for initialization
+    void Start () {
         explode.SetActive(false);
         person.SetActive(true);
         flash.enabled = false;
@@ -29,6 +40,11 @@ public class Shoot : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            foreach (GameObject go in spawn)
+            {
+                go.GetComponent<BloodSpawn>().enabled = true;
+            }
+
             move = true;
             explode.SetActive(true);
             person.SetActive(false);

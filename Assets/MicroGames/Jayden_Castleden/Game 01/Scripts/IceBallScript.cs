@@ -54,7 +54,7 @@ public class IceBallScript : MonoBehaviour {
 
     void Ice()
     {
-        if (time >= 4)
+        if (time >= 20)
         {
             move = false;
         }
