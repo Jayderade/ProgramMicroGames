@@ -91,7 +91,7 @@ public class GetOverHere : MonoBehaviour {
     {
         if (activetime)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetButton("Fire1"))
             {
                 iceBall.SetActive(false);
                 move = false;

@@ -38,7 +38,7 @@ public class Shoot : MonoBehaviour {
         {
             bullet.transform.position = Vector3.MoveTowards(transform.position, perExp.position, speed * Time.deltaTime);
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButton("Fire1"))
         {
             foreach (GameObject go in spawn)
             {
