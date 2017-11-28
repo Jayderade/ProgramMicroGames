@@ -1,18 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StirlingMulvey;
 
-public class DestroyOnLifeTime : MonoBehaviour {
+namespace JaydenGame03
+{
+    public class DestroyOnLifeTime : MonoBehaviour
+    {
 
-    public float lifeTime = 5f;
+        public float lifeTime = 5f;
 
-	// Use this for initialization
-	void Start () {
-        Destroy(gameObject, lifeTime);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        // Use this for initialization
+        void Start()
+        {
+            Destroy(gameObject, lifeTime);
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+    }
 }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using StirlingMulvey;
 
-namespace JaydenGame03
+namespace JaydenGame02
 {
-    public class BloodSpawn : MonoBehaviour
+    public class Blood : MonoBehaviour
     {
 
         public GameObject bloodPrefab; // Prefab of Blood    

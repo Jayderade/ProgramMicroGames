@@ -2,99 +2,106 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using StirlingMulvey;
 
-
-public class GetOverHere : MonoBehaviour {
-
-    public GameObject spear;
-    public Transform sub;
-    public GameObject scorp;
-    public Transform lastRope;
-    public GameObject iceBall;
-    public GameObject person;
-
-    public GameObject[] spawn;
-
-    public Text fatal;
-
-
-    public float time = 1f;
-    public float speed = 1f;
-
-    public bool move;
-    public bool activetime;
-
-    public MeshRenderer ropeRend;
-
-
-    void Awake()
+namespace JaydenGame01
+{
+    public class GetOverHere : MonoBehaviour
     {
-        spawn = GameObject.FindGameObjectsWithTag("Spawner");
 
-        foreach (GameObject go in spawn)
+        public GameObject spear;
+        public Transform sub;
+        public GameObject scorp;
+        public Transform lastRope;
+        public GameObject iceBall;
+        public GameObject person;
+
+        public GameObject[] spawn;
+
+        public Text fatal;
+
+
+        public float time = 1f;
+        public float speed = 1f;
+
+        public static bool win;
+        public bool move;
+        public bool activetime;
+
+        public MeshRenderer ropeRend;
+
+
+        void Awake()
         {
-            go.GetComponent<BloodSpawn>().enabled = false;
+            win = GlobalGameManager.gameWon = true;
+            GlobalGameManager.verb = "Shoot!";
+            spawn = GameObject.FindGameObjectsWithTag("Spawner");
+
+            
         }
-    }
 
-    // Use this for initialization
-    void Start () {
-        time += 1 * Time.deltaTime;
-        move = true;
-        activetime = true;
-        fatal.enabled = false;
-        person.SetActive(false);
-    }
-	
-	// Update is called once per frame
-	void Update () {
-        Spear();
-        time += 1 * Time.deltaTime;
-        if (time >= 20)
+        // Use this for initialization
+        void Start()
         {
-            activetime = false;
-        }
-            if (move == false)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, lastRope.position, speed * Time.deltaTime);
+
+            time += 1 * Time.deltaTime;
+            move = true;
+            activetime = true;
+            fatal.enabled = false;
+            person.SetActive(false);
         }
 
-        
-    }
-
-    void OnTriggerEnter(Collider sub)
-    {
-        if (sub.gameObject.CompareTag("Sub"))
+        // Update is called once per frame
+        void Update()
         {
-            foreach (GameObject go in spawn)
+            Spear();
+            time += 1 * Time.deltaTime;
+            if (time >= 7f && move)
             {
-                go.GetComponent<BloodSpawn>().enabled = true;
+                activetime = false;
+                win = false;
             }
-            fatal.enabled = true;
-            person.SetActive(true);
-        }
-    }
+            if (move == false)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, lastRope.position, speed * Time.deltaTime);
+            }
 
-    void OnTriggerExit(Collider rope)
-    {              
+
+        }
+
+        void OnTriggerEnter(Collider sub)
+        {
+            if (sub.gameObject.CompareTag("Sub"))
+            {
+                GlobalGameManager.gameWon = true;
+                
+                fatal.enabled = true;
+                person.SetActive(true);
+            }
+        }
+
+        void OnTriggerExit(Collider rope)
+        {
 
             if (rope.gameObject.CompareTag("Rope"))
-        {
-            
-            ropeRend = rope.gameObject.GetComponent<MeshRenderer>();
-            ropeRend.enabled = true;
-            
-        }
-    }
-
-    void Spear ()
-    {
-        if (activetime)
-        {
-            if (Input.GetButton("Fire1"))
             {
-                iceBall.SetActive(false);
-                move = false;
+
+                ropeRend = rope.gameObject.GetComponent<MeshRenderer>();
+                ropeRend.enabled = true;
+
+            }
+        }
+
+        void Spear()
+        {
+            if (activetime)
+            {
+                if (Input.GetButton("Fire1"))
+                {
+                    
+                    iceBall.SetActive(false);
+                    move = false;
+                }
             }
         }
     }
